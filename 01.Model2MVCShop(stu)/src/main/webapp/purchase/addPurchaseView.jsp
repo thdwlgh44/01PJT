@@ -6,7 +6,7 @@
 
 <%
 	ProductVO productVO = (ProductVO)request.getAttribute("productVO");
-	PurchaseVO cvo = (PurchaseVO)request.getAttribute("cvo");
+	PurchaseVO purchaseVO = (PurchaseVO)request.getAttribute("purchaseVO");
 %>
 
 <html>

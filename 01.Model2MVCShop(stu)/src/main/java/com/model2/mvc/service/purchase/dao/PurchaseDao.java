@@ -28,13 +28,14 @@ public class PurchaseDao {
 		PreparedStatement stmt = con.prepareStatement(sql);
 		
 		stmt.setInt(1, purchaseVO.getPurchaseProd().getProdNo());
-		stmt.setString(1, purchaseVO.getBuyer().getUserId());
-		stmt.setString(2, purchaseVO.getPaymentOption());//payment_option
-		stmt.setString(3, purchaseVO.getReceiverName());//receiver_name
-		stmt.setString(4, purchaseVO.getReceiverPhone());//receiver_phone
-		stmt.setString(5, purchaseVO.getDivyAddr());//divy_addr
-		stmt.setString(6, purchaseVO.getDivyRequest());//divy_request
-		stmt.setString(7, purchaseVO.getTranCode());//tran_status_code
+		stmt.setString(2, purchaseVO.getBuyer().getUserId());
+		stmt.setString(3, purchaseVO.getPaymentOption());//payment_option
+		stmt.setString(4, purchaseVO.getReceiverName());//receiver_name
+		stmt.setString(5, purchaseVO.getReceiverPhone());//receiver_phone
+		stmt.setString(6, purchaseVO.getDivyAddr());//divy_addr
+		stmt.setString(7, purchaseVO.getDivyRequest());//divy_request
+		stmt.setString(8, purchaseVO.getTranCode());//tran_status_code
+		stmt.setString(9, purchaseVO.getDivyDate());//divy_date
 		
 		stmt.executeUpdate();
 		

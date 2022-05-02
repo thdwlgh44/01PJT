@@ -18,30 +18,34 @@ public class AddPurchaseAction extends Action {
 
 	@Override
 	public String execute(HttpServletRequest request, 
-			HttpServletResponse response) throws Exception {
+		HttpServletResponse response) throws Exception {
+		PurchaseVO purchaseVO = new PurchaseVO();
 		
-		//유저정보 찾기
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(true);
 		UserVO userVO = (UserVO)session.getAttribute("user");
 		
 		ProductService prodService = new ProductServiceImpl();
 		ProductVO productVO = prodService.getProduct(Integer.parseInt(request.getParameter("prodNo")));
-		
-		PurchaseVO purchaseVO = new PurchaseVO();
+		System.out.println(productVO);
 		
 		purchaseVO.setBuyer(userVO);//구매자아이디 
+		purchaseVO.setPurchaseProd(productVO);//구매물품정보 가져오기
+		purchaseVO.setDivyAddr(request.getParameter("receiverAddr"));//구매자주소 -> divyAddr
+		purchaseVO.setDivyDate(request.getParameter("receiverDate"));//배송희망일 -> divyDate
+		purchaseVO.setDivyRequest(request.getParameter("receiverRequest"));//구매요청사항
 		purchaseVO.setPaymentOption(request.getParameter("paymentOption"));//구매방법
 		purchaseVO.setReceiverName(request.getParameter("receiverName"));//구매자이름
 		purchaseVO.setReceiverPhone(request.getParameter("receiverPhone"));//구매자연락처
-		purchaseVO.setDivyAddr(request.getParameter("receiverAddr"));//구매자주소
-		purchaseVO.setDivyRequest(request.getParameter("receiverRequest"));//구매요청사항
-		purchaseVO.setDivyDate(request.getParameter("receiverDate"));//배송희망일
 		purchaseVO.setTranCode("1");
+		
+		System.out.println(purchaseVO);
 		
 		PurchaseService service = new PurchaseServiceImpl();
 		service.addPurchase(purchaseVO);//구매정보를 입력
 		
-		return "forward:/purchase/addPurchase.jsp";
+		request.setAttribute("purchaseVO", purchaseVO);
+		request.setAttribute("productVO", productVO);
+		return "redirect:/listPurchase.do";
 	}
 
 }

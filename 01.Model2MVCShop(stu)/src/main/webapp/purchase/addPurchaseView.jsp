@@ -7,6 +7,7 @@
 <%
 	ProductVO productVO = (ProductVO)request.getAttribute("productVO");
 	PurchaseVO purchaseVO = (PurchaseVO)request.getAttribute("purchaseVO");
+	UserVO userVO = (UserVO)session.getAttribute("user");
 %>
 
 <html>
@@ -51,7 +52,7 @@ function fncAddPurchase() {
 	</tr>
 </table>
 
-<input type="hidden" name="prodNo" value="10000" />
+<input type="hidden" name="prodNo" value="<%=productVO.getProdNo() %>" />
 
 <table width="600" border="0" cellspacing="0" cellpadding="0"	align="center" style="margin-top: 13px;">
 	<tr>
@@ -119,7 +120,7 @@ function fncAddPurchase() {
 	</tr>
 	<tr>
 		<td width="104" class="ct_write">
-			구매자아이디 <img 	src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
+			구매자아이디 <img src="/images/ct_icon_red.gif" width="3" height="3" align="absmiddle"/>
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">admin</td>
@@ -134,6 +135,7 @@ function fncAddPurchase() {
 		<td class="ct_write01">
 			<select name="paymentOption" class="ct_input_g" 
 				style="width: 100px; height: 19px" maxLength="20">
+				
 				<option value="1" selected="selected">현금구매</option>
 				<option value="2">신용구매</option>
 			</select>
@@ -147,7 +149,7 @@ function fncAddPurchase() {
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
 			<input type="text" name="receiverName" 	class="ct_input_g" 
-						style="width: 100px; height: 19px" maxLength="20" value="admin" />
+						style="width: 100px; height: 19px" maxLength="20" value="<%=userVO.getUserName() %>" />
 		</td>
 	</tr>
 	<tr>
@@ -158,7 +160,7 @@ function fncAddPurchase() {
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
 			<input 	type="text" name="receiverPhone" class="ct_input_g" 
-							style="width: 100px; height: 19px" maxLength="20" value="010-1234-5678" />
+							style="width: 100px; height: 19px" maxLength="20" value="<%=userVO.getPhone() %>" />
 		</td>
 	</tr>
 	<tr>
@@ -169,7 +171,7 @@ function fncAddPurchase() {
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
 			<input 	type="text" name="receiverAddr" class="ct_input_g" 
-							style="width: 100px; height: 19px" maxLength="20" 	value="서울시 서초구" />
+							style="width: 100px; height: 19px" maxLength="20" 	value="<%=userVO.getAddr() %>" />
 		</td>
 	</tr>
 	<tr>
@@ -179,7 +181,7 @@ function fncAddPurchase() {
 		<td width="104" class="ct_write">구매요청사항</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<input		type="text" name="receiverRequest" 	class="ct_input_g" 
+			<input type="text" name="receiverRequest" 	class="ct_input_g" 
 							style="width: 100px; height: 19px" maxLength="20" />
 		</td>
 	</tr>

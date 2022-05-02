@@ -3,7 +3,7 @@
     pageEncoding="EUC-KR"%>
 
 <%
-ProductVO vo = (ProductVO)request.getAttribute("vo");
+	ProductVO vo = (ProductVO)request.getAttribute("vo");
 %>
 
 <html>

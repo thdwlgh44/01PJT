@@ -119,7 +119,7 @@ public class PurchaseDao {
 		sql += " ORDER BY prod_no";
 		
 		PreparedStatement stmt = 
-				con.prepareStatement(	sql,
+		con.prepareStatement(	sql,
 															ResultSet.TYPE_SCROLL_INSENSITIVE,
 															ResultSet.CONCUR_UPDATABLE);
 			ResultSet rs = stmt.executeQuery();
@@ -258,22 +258,19 @@ public class PurchaseDao {
 	}//updatePurchase()
 	
 	//구매 상태 코드 수정을 위한 DBMS 수행
-	/*public void updateTranCode(PurchaseVO purchaseVO) throws Exception {
+	public void updateTranCode(PurchaseVO purchaseVO) throws Exception {
 		
 		Connection con = DBUtil.getConnection();
 		
-		String sql = "UPDATE transaction SET prod_name=?,prod_detail=?,manufacture_day=to_char(to_date(?, 'yyyy-mm-dd'), 'yyyymmdd'),"
-				+"price=?,image_file=? WHERE prod_no=?";
+		String sql = "UPDATE transaction SET tran_status_code=? "
+				+"WHERE prod_no=?";
 		
-		PreparedStatement stmt = con.prepareStatement(sql);
-		stmt.setString(1, purchaseVO.getProdName());
-		stmt.setString(2, productVO.getProdDetail());
-		stmt.setString(3, productVO.getManuDate());
-		stmt.setInt(4, productVO.getPrice());
-		stmt.setString(5, productVO.getFileName());
-		stmt.setInt(6, productVO.getProdNo());
-		stmt.executeUpdate();
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, purchaseVO.getTranCode());
+		pstmt.setInt(2, purchaseVO.getPurchaseProd().getProdNo());
+		
+		pstmt.executeUpdate();
 		
 		con.close();
-	}//updateTranCode()*/
+	}//updateTranCode()
 }
